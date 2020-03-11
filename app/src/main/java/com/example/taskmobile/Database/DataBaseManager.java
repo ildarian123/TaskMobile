@@ -8,7 +8,9 @@ public interface DataBaseManager {
 
     void insertPostToDataBase(List<PostDb> postDb);
     void deleteAllPosts();
-    void getNewPosts();
-    List<PostDb> getAll();
+    List<PostDb> getNewPosts(int maxItem, int limit);
+    List<PostDb> getAllPosts();
+    List<PostDb> getlastPosts(int limit);
+    int getCountOfRows();
 
 }

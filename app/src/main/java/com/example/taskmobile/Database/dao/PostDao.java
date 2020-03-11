@@ -14,6 +14,9 @@ public interface PostDao {
     @Query("SELECT * FROM posts")
     List<PostDb> getAll();
 
+    @Query("SELECT * FROM posts ORDER BY id DESC LIMIT :limit ")
+    List<PostDb> getLastPosts(int limit);
+
     @Query("SELECT * FROM posts WHERE id IN (:ids)")
     List<PostDb> loadAllByIds(int[] ids);
 
@@ -28,4 +31,10 @@ public interface PostDao {
 
     @Delete
     void delete(PostDb postDb);
+
+    @Query("SELECT * FROM posts WHERE id < :maxItem ORDER BY id DESC limit :limit")
+    List<PostDb> getNewPosts(int maxItem, int limit);
+
+    @Query("SELECT Count(*) FROM posts")
+    int getCountOfRows();
 }

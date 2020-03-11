@@ -9,7 +9,7 @@ import com.example.taskmobile.ui.MainActivity;
 
 import java.util.List;
 
-public class DataBaseManagerImpl implements DataBaseManager{
+public class DataBaseManagerImpl implements DataBaseManager {
 
     private Context context;
     private PostDataBase dataBase;
@@ -33,12 +33,23 @@ public class DataBaseManagerImpl implements DataBaseManager{
     }
 
     @Override
-    public void getNewPosts() {
+    public List<PostDb> getNewPosts(int maxItem, int limit) {
+        return postDao.getNewPosts(maxItem, limit);
+    }
 
+
+    @Override
+    public List<PostDb> getAllPosts() {
+        return postDao.getAll();
     }
 
     @Override
-    public List<PostDb> getAll() {
-        return postDao.getAll();
+    public List<PostDb> getlastPosts(int limit) {
+        return postDao.getLastPosts(limit);
+    }
+
+    @Override
+    public int getCountOfRows() {
+        return postDao.getCountOfRows();
     }
 }

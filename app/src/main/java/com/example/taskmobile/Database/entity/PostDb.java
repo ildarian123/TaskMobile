@@ -19,4 +19,7 @@ public class PostDb {
 
     @ColumnInfo(name = "date")
     public long date;
+
+    @ColumnInfo(name = "newPost")
+    public boolean newPost;
 }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">TaskMobile</string>
     <string name="clear">CLEAR</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reload">RELOAD</string>
+    <string name="please_try_again">Please, try again</string>
+    <string name="oooops_somerhing_is_wrong">Oooops somerhing is wrong</string>
 </resources>
