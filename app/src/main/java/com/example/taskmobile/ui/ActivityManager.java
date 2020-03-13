@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ActivityManager {
     void onLastItemShown();
+    void OnNewPostsAddedToDataBase(List<PostDb> listOFNewPosts);
 }

@@ -1,5 +1,6 @@
 package com.example.taskmobile.Database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -33,8 +34,14 @@ public interface PostDao {
     void delete(PostDb postDb);
 
     @Query("SELECT * FROM posts WHERE id < :maxItem ORDER BY id DESC limit :limit")
-    List<PostDb> getNewPosts(int maxItem, int limit);
+    List<PostDb> getNextPosts(int maxItem, int limit);
+
+    @Query("SELECT * FROM posts WHERE id > :maxItem ORDER BY id ASC")
+    List<PostDb> getNewPosts(int maxItem);
 
     @Query("SELECT Count(*) FROM posts")
     int getCountOfRows();
+
+    @Query("SELECT Count(*) FROM posts")
+    LiveData<Integer> getCountOfNewPosts();
 }

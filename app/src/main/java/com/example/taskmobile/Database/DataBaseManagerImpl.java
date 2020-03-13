@@ -2,10 +2,11 @@ package com.example.taskmobile.Database;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.taskmobile.Database.dao.PostDao;
 import com.example.taskmobile.Database.entity.PostDb;
 import com.example.taskmobile.ui.ActivityManager;
-import com.example.taskmobile.ui.MainActivity;
 
 import java.util.List;
 
@@ -33,10 +34,9 @@ public class DataBaseManagerImpl implements DataBaseManager {
     }
 
     @Override
-    public List<PostDb> getNewPosts(int maxItem, int limit) {
-        return postDao.getNewPosts(maxItem, limit);
+    public List<PostDb> getNextPosts(int maxItem, int limit) {
+        return postDao.getNextPosts(maxItem, limit);
     }
-
 
     @Override
     public List<PostDb> getAllPosts() {
@@ -49,7 +49,21 @@ public class DataBaseManagerImpl implements DataBaseManager {
     }
 
     @Override
+    public List<PostDb> getNewPosts(int maxItem) {
+        return postDao.getNewPosts(maxItem);
+    }
+
+    @Override
     public int getCountOfRows() {
         return postDao.getCountOfRows();
+    }
+
+    @Override
+    public LiveData<Integer> getCountOfNewPosts() {
+        return postDao.getCountOfNewPosts();
+    }
+
+    public void myMethod() {
+
     }
 }

@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import com.example.taskmobile.Database.entity.PostDb;
 import com.example.taskmobile.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,8 +37,9 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
     public SharedPreferences mSettings;
     private List<PostDb> newPosts;
     private Button clearButton;
-    private Button reloadButton;
+    private Button countOfPostsButton;
     private ActivityManager activityManager;
+    private LiveData<Integer> liveData;
 
     @Inject
     DataBaseManager dataBaseManager;
@@ -53,6 +54,7 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
         mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean isFirstStart = mSettings.getBoolean(FIRST_START_OF_THE_APP, true);
 
+        countOfPostsButton = view.findViewById(R.id.button_CountOFPosts);
 
         if (isFirstStart) {
             ArrayList<PostDb> posts = createListOfPosts(100, 0);
@@ -61,6 +63,21 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
             editor.apply();
             dataBaseManager.insertPostToDataBase(posts);
         }
+
+        liveData = dataBaseManager.getCountOfNewPosts();
+        liveData.observe(getActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                int adapterCountOFPosts = adapter.getListOfPosts().size();
+                countOfPostsButton.setText(String.valueOf(""+String.valueOf(integer - adapterCountOFPosts))+ " new posts");
+
+                if (integer == 0) {
+                    countOfPostsButton.setVisibility(View.INVISIBLE);
+                } else {
+                    countOfPostsButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         new Thread(new Runnable() {
             @Override
@@ -79,6 +96,30 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
                 }
             }
         }).start();
+
+
+        countOfPostsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<PostDb> newPosts;
+                int maxItemId = adapter.getListOfPosts().size();
+
+                if (maxItemId == 0) {
+                    List<PostDb> allPosts = dataBaseManager.getAllPosts();
+                    Collections.reverse(allPosts);
+                    adapter.setListOfPosts(allPosts);
+                } else {
+                    newPosts = dataBaseManager.getNewPosts(adapter.getListOfPosts().get(0).id);
+                    Collections.reverse(newPosts);
+                    List<PostDb> listOfPosts = adapter.getListOfPosts();
+                    List<PostDb> asd = new ArrayList<>();
+                    asd.addAll(newPosts);
+                    asd.addAll(listOfPosts);
+                    adapter.setListOfPosts(asd);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         clearButton = view.findViewById(R.id.button_clear);
         clearButton.setOnClickListener(new View.OnClickListener() { //TODO
@@ -101,6 +142,14 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
         adapter = new PostAdapter(posts, this);
         recyclerList.setAdapter(adapter);
 
+        if (adapter.getListOfPosts().size() == 0) {
+            //countOfPostsButton.setVisibility(View.INVISIBLE);
+
+        } else {
+//            countOfPostsButton.setText("" + (dataBaseManager.getCountOfNewPosts().getValue() - adapter.getListOfPosts().size()) + " NEW POSTS");
+
+        }
+
         return view;
     }
 
@@ -122,8 +171,13 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
         getMorePosts();
     }
 
+    @Override
+    public void OnNewPostsAddedToDataBase(List<PostDb> listOFNewPosts) {
+
+    }
+
     private void getMorePosts() {
-        List<PostDb> newPosts = dataBaseManager.getNewPosts(adapter.getListOfPosts().get(adapter.getListOfPosts().size() - 1).id, 15);
+        List<PostDb> newPosts = dataBaseManager.getNextPosts(adapter.getListOfPosts().get(adapter.getListOfPosts().size() - 1).id, 15);
         adapter.getListOfPosts().addAll(newPosts);
 
         recyclerList.post(new Runnable() {
