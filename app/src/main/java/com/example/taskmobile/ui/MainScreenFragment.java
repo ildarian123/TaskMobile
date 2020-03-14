@@ -30,7 +30,7 @@ import javax.inject.Inject;
 import static com.example.taskmobile.ui.MainActivity.APP_PREFERENCES;
 import static com.example.taskmobile.ui.MainActivity.FIRST_START_OF_THE_APP;
 
-public class MainScreenFragment extends Fragment implements ActivityManager {
+public class MainScreenFragment extends Fragment implements ActivityManager{
 
     private PostAdapter adapter;
     private RecyclerView recyclerList;
@@ -53,8 +53,10 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
         App.mainComponent.injectsMainScreenFragment(this);
         mSettings = getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean isFirstStart = mSettings.getBoolean(FIRST_START_OF_THE_APP, true);
+        activityManager = (ActivityManager) getActivity();
 
         countOfPostsButton = view.findViewById(R.id.button_CountOFPosts);
+        countOfPostsButton.setAllCaps(false);
 
         if (isFirstStart) {
             ArrayList<PostDb> posts = createListOfPosts(100, 0);
@@ -121,17 +123,18 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
             }
         });
 
-        clearButton = view.findViewById(R.id.button_clear);
-        clearButton.setOnClickListener(new View.OnClickListener() { //TODO
-            @Override
-            public void onClick(View view) {
-
-                dataBaseManager.deleteAllPosts();
-                List<PostDb> allPosts = dataBaseManager.getAllPosts();
-                adapter = new PostAdapter(allPosts, getActivityManager());
-                recyclerList.setAdapter(adapter);
-            }
-        });
+//        clearButton = view.findViewById(R.id.button_clear);
+//        clearButton.setAllCaps(false);
+//        clearButton.setOnClickListener(new View.OnClickListener() { //TODO
+//            @Override
+//            public void onClick(View view) {
+//
+//                dataBaseManager.deleteAllPosts();
+//                List<PostDb> allPosts = dataBaseManager.getAllPosts();
+//                adapter = new PostAdapter(allPosts, getActivityManager());
+//                recyclerList.setAdapter(adapter);
+//            }
+//        });
 
         recyclerList = view.findViewById(R.id.rv_posts);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -141,6 +144,9 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
         List<PostDb> posts = dataBaseManager.getlastPosts(20);
         adapter = new PostAdapter(posts, this);
         recyclerList.setAdapter(adapter);
+
+        activityManager.setRecyclerList(recyclerList);
+        activityManager.setPostAdapter(adapter);
 
         if (adapter.getListOfPosts().size() == 0) {
             //countOfPostsButton.setVisibility(View.INVISIBLE);
@@ -173,6 +179,16 @@ public class MainScreenFragment extends Fragment implements ActivityManager {
 
     @Override
     public void OnNewPostsAddedToDataBase(List<PostDb> listOFNewPosts) {
+
+    }
+
+    @Override
+    public void setRecyclerList(RecyclerView recyclerList) {
+
+    }
+
+    @Override
+    public void setPostAdapter(PostAdapter adapter) {
 
     }
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#88ffff">
 
 
     <TextView
@@ -13,24 +14,37 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="TITLE" />
+        tools:text="TITLE"
+        android:fontFamily="sans-serif-black"
+        android:paddingStart="16dp"/>
 
     <TextView
         android:id="@+id/authorOfThePost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14dp"
         app:layout_constraintTop_toBottomOf="@+id/titleOfThePost"
-        tools:text="AUTHOR" />
+        tools:text="AUTHOR"
+        android:paddingBottom="10dp"
+        android:paddingStart="16dp"/>
 
     <TextView
         android:id="@+id/publishedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titleOfThePost"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="DATE" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="7dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
