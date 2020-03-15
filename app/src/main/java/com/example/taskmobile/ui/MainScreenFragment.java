@@ -9,12 +9,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.taskmobile.App;
 import com.example.taskmobile.Database.DataBaseManager;
@@ -40,6 +42,7 @@ public class MainScreenFragment extends Fragment implements ActivityManager{
     private Button countOfPostsButton;
     private ActivityManager activityManager;
     private LiveData<Integer> liveData;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     DataBaseManager dataBaseManager;
@@ -57,6 +60,33 @@ public class MainScreenFragment extends Fragment implements ActivityManager{
 
         countOfPostsButton = view.findViewById(R.id.button_CountOFPosts);
         countOfPostsButton.setAllCaps(false);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                List<PostDb> newPosts;
+                int maxItemId = adapter.getListOfPosts().size();
+
+                if (maxItemId == 0) {
+                    List<PostDb> allPosts = dataBaseManager.getAllPosts();
+                    Collections.reverse(allPosts);
+                    adapter.setListOfPosts(allPosts);
+                } else {
+                    newPosts = dataBaseManager.getNewPosts(adapter.getListOfPosts().get(0).id);
+                    Collections.reverse(newPosts);
+                    List<PostDb> listOfPosts = adapter.getListOfPosts();
+                    List<PostDb> asd = new ArrayList<>();
+                    asd.addAll(newPosts);
+                    asd.addAll(listOfPosts);
+                    adapter.setListOfPosts(asd);
+                }
+                adapter.notifyDataSetChanged();
+                countOfPostsButton.setVisibility(View.INVISIBLE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
 
         if (isFirstStart) {
             ArrayList<PostDb> posts = createListOfPosts(100, 0);
@@ -120,6 +150,7 @@ public class MainScreenFragment extends Fragment implements ActivityManager{
                     adapter.setListOfPosts(asd);
                 }
                 adapter.notifyDataSetChanged();
+                countOfPostsButton.setVisibility(View.INVISIBLE);
             }
         });
 
