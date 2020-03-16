@@ -5,28 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.taskmobile.Database.entity.PostDb;
 import com.example.taskmobile.R;
-
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
-    public void setListOfPosts(List<PostDb> listOfPosts) {
+    void setListOfPosts(List<PostDb> listOfPosts) {
         this.listOfPosts = listOfPosts;
     }
 
     private List<PostDb> listOfPosts;
     private MainPresenter manager;
 
-    public PostAdapter(List<PostDb> listOfPosts, MainPresenter manager) {
+    PostAdapter(List<PostDb> listOfPosts, MainPresenter manager) {
         this.listOfPosts = listOfPosts;
         this.manager = manager;
     }
@@ -43,8 +39,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-
-        Date mydate = new Date(1);
 
         if (position == listOfPosts.size() - 1) {
             manager.onLastItemShown();
@@ -64,7 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return listOfPosts.size();
     }
 
-    class PostViewHolder extends RecyclerView.ViewHolder {
+    static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleOfThePost;
         TextView authorOfThePost;
@@ -79,7 +73,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     }
 
-    public List<PostDb> getListOfPosts() {
+    List<PostDb> getListOfPosts() {
         return this.listOfPosts;
     }
 

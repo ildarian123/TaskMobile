@@ -1,13 +1,10 @@
 package com.example.taskmobile.ui;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.lifecycle.LiveData;
 import com.example.taskmobile.Database.DataBaseManager;
 import com.example.taskmobile.Database.entity.PostDb;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class MainPresenterImpl implements MainPresenter {
@@ -51,6 +48,21 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public List<PostDb> getlastPosts(int count) {
         return dataBaseManager.getlastPosts(count);
+    }
+
+    @Override
+    public List<PostDb> getNewPosts(int maxID) {
+        return dataBaseManager.getNewPosts(maxID);
+    }
+
+    @Override
+    public LiveData<Integer> getCountOfNewPosts() {
+        return dataBaseManager.getCountOfNewPosts();
+    }
+
+    @Override
+    public int getCountOfRows() {
+        return dataBaseManager.getCountOfRows();
     }
 
 }

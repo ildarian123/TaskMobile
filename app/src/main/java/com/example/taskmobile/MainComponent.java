@@ -1,7 +1,6 @@
 package com.example.taskmobile;
 
 import com.example.taskmobile.ui.MainActivity;
-import com.example.taskmobile.ui.MainPresenterImpl;
 import com.example.taskmobile.ui.MainScreenFragment;
 
 import dagger.Component;
@@ -11,5 +10,4 @@ public interface MainComponent {
 
     void injectsMainActivity(MainActivity mainActivity);
     void injectsMainScreenFragment(MainScreenFragment mainScreenFragment);
-    void injectsMainPresenterImpl(MainPresenterImpl mainPresenter);
 }

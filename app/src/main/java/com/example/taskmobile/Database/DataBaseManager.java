@@ -10,7 +10,6 @@ public interface DataBaseManager {
 
     void insertPostToDataBase(List<PostDb> postDb);
     void deleteAllPosts();
-    List<PostDb> getNextPosts(int maxItem, int limit);
     List<PostDb> getAllPosts();
     List<PostDb> getlastPosts(int limit);
     List<PostDb> getNewPosts(int maxItem);

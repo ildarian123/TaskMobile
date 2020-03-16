@@ -1,6 +1,6 @@
 package com.example.taskmobile.ui;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.LiveData;
 import com.example.taskmobile.Database.entity.PostDb;
 import java.util.List;
 
@@ -10,4 +10,7 @@ public interface MainPresenter {
     List<PostDb> getAllPosts();
     void createListOfPosts(int count, int firstPost);
     List<PostDb>getlastPosts(int count);
+    List<PostDb> getNewPosts(int maxID);
+    LiveData<Integer> getCountOfNewPosts();
+    int getCountOfRows();
 }

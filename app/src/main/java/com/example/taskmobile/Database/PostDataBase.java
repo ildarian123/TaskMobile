@@ -12,7 +12,7 @@ public abstract class PostDataBase extends RoomDatabase {
 
     private static PostDataBase db = null;
 
-    public static PostDataBase getDataBase(Context applicationContext) {
+    static PostDataBase getDataBase(Context applicationContext) {
         if (db == null) {
             db = Room.databaseBuilder(applicationContext,
                     PostDataBase.class, "post_data_base")
