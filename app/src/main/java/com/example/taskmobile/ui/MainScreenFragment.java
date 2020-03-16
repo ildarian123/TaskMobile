@@ -42,7 +42,8 @@ public class MainScreenFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_screen, container, false);
 
         App.mainComponent.injectsMainScreenFragment(this);
-        mSettings = Objects.requireNonNull(getActivity()).getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mSettings = Objects.requireNonNull(getActivity())
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean isFirstStart = mSettings.getBoolean(FIRST_START_OF_THE_APP, true);
 
         countOfPostsButton = view.findViewById(R.id.button_CountOFPosts);
