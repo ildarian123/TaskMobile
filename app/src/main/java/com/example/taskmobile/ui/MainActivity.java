@@ -9,24 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.taskmobile.App;
 import com.example.taskmobile.Database.DataBaseManager;
 import com.example.taskmobile.Database.entity.PostDb;
 import com.example.taskmobile.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements ActivityManager {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     @Inject
     DataBaseManager dataBaseManager;
+
+    @Inject
+    MainPresenter mainPresenter;
 
     private List<PostDb> listOfPosts;
     private RecyclerView recyclerList;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ActivityManager {
     private TextView clearButton;
     private PostAdapter adapter;
 
-    private Fragment mainScreenFragment;
+    private MainScreenFragment mainScreenFragment;
 
 
     @Override
@@ -46,42 +46,30 @@ public class MainActivity extends AppCompatActivity implements ActivityManager {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         clearButton = findViewById(R.id.button_clear);
         clearButton.setAllCaps(false);
 
         clearButton.setOnClickListener(new View.OnClickListener() { //TODO
             @Override
             public void onClick(View view) {
-                if (adapter != null) {
-                    dataBaseManager.deleteAllPosts();
-                    List<PostDb> allPosts = dataBaseManager.getAllPosts();
-                    adapter.setListOfPosts(allPosts);
-                    adapter.notifyDataSetChanged();
-                }
+               mainScreenFragment.clearList();
             }
         });
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.navigate(R.id.ErorScreenFragment);
-
-
         App.mainComponent.injectsMainActivity(this);
+    }
 
+    public void setFragment(MainScreenFragment fragment) {
+        mainScreenFragment = fragment;
     }
 
     @Override
-    public void onLastItemShown() {
-
-    }
-
-    @Override
-    public void OnNewPostsAddedToDataBase(List<PostDb> listOFNewPosts) {
-
-    }
-
-    @Override
-    public void setRecyclerList(RecyclerView recyclerList) {
-        this.recyclerList = recyclerList;
+    public MainPresenter getMainPresenter() {
+        return mainPresenter;
     }
 
     @Override
@@ -89,10 +77,14 @@ public class MainActivity extends AppCompatActivity implements ActivityManager {
         this.adapter = adapter;
     }
 
+    @Override
+    public void setRecyclerList(RecyclerView recyclerList) {
 
-    public ActivityManager getActivityManager() {
-        return this;
     }
 
+    @Override
+    public void setListOfPostsToAdapter(List<PostDb> listOfPosts) {
+
+    }
 
 }

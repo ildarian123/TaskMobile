@@ -1,26 +1,21 @@
 package com.example.taskmobile.ui;
 
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmobile.Database.entity.PostDb;
 import com.example.taskmobile.R;
 
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.locks.Condition;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
@@ -29,9 +24,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     private List<PostDb> listOfPosts;
-    private ActivityManager manager;
+    private MainPresenter manager;
 
-    public PostAdapter(List<PostDb> listOfPosts, ActivityManager manager) {
+    public PostAdapter(List<PostDb> listOfPosts, MainPresenter manager) {
         this.listOfPosts = listOfPosts;
         this.manager = manager;
     }

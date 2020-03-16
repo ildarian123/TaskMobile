@@ -15,7 +15,7 @@ public class App extends Application {
 
     private void initDagger() {
         mainComponent = DaggerMainComponent.builder()
-                .depsManager(new DepsManager(this))
+                .mainModule(new MainModule(this))
                 .build();
     }
 }
