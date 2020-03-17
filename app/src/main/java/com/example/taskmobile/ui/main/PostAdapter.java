@@ -1,4 +1,4 @@
-package com.example.taskmobile.ui;
+package com.example.taskmobile.ui.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.taskmobile.Database.entity.PostDb;
+import com.example.taskmobile.database.entity.PostDb;
 import com.example.taskmobile.R;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,9 +20,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     private List<PostDb> listOfPosts;
-    private MainPresenter manager;
+    private MainScreenView manager;
 
-    PostAdapter(List<PostDb> listOfPosts, MainPresenter manager) {
+
+
+    PostAdapter(List<PostDb> listOfPosts, MainScreenView manager) {
         this.listOfPosts = listOfPosts;
         this.manager = manager;
     }

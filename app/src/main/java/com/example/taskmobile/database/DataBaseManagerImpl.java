@@ -1,9 +1,9 @@
-package com.example.taskmobile.Database;
+package com.example.taskmobile.database;
 
 import android.content.Context;
 import androidx.lifecycle.LiveData;
-import com.example.taskmobile.Database.dao.PostDao;
-import com.example.taskmobile.Database.entity.PostDb;
+import com.example.taskmobile.database.dao.PostDao;
+import com.example.taskmobile.database.entity.PostDb;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class DataBaseManagerImpl implements DataBaseManager {
     }
 
     @Override
-    public List<PostDb> getlastPosts(int limit) {
+    public List<PostDb> getLastPosts(int limit) {
         return postDao.getLastPosts(limit);
     }
 

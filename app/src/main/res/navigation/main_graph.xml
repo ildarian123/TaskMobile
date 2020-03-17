@@ -6,14 +6,12 @@
     app:startDestination="@id/MainScreenFragment">
     <fragment
         android:id="@+id/MainScreenFragment"
-        android:name="com.example.taskmobile.ui.MainScreenFragment"
+        android:name="com.example.taskmobile.ui.main.MainScreenFragment"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" />
     <fragment
         android:id="@+id/ErorScreenFragment"
-        android:name="com.example.taskmobile.ui.ErorScreenFragment"
-        android:label="fragment_eror_screen"
-        tools:layout="@layout/fragment_eror_screen" />
+        android:name="com.example.taskmobile.ui.error.ErrorScreenFragment"
+        android:label="fragment_error_screen"
+        tools:layout="@layout/fragment_error_screen" />
 </navigation>
-
-<!--    -->

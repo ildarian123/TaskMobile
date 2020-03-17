@@ -1,4 +1,4 @@
-package com.example.taskmobile.Database.entity;
+package com.example.taskmobile.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

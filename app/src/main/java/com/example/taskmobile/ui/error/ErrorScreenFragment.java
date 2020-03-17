@@ -1,4 +1,4 @@
-package com.example.taskmobile.ui;
+package com.example.taskmobile.ui.error;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,14 +11,14 @@ import com.example.taskmobile.R;
 import java.util.Objects;
 
 
-public class ErorScreenFragment extends Fragment {
+public class ErrorScreenFragment extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_eror_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_error_screen, container, false);
 
         Button buttonReload = view.findViewById(R.id.button_reload);
         buttonReload.setOnClickListener(new View.OnClickListener() {

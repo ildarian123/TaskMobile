@@ -1,11 +1,11 @@
-package com.example.taskmobile.Database;
+package com.example.taskmobile.database;
 import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.taskmobile.Database.dao.PostDao;
-import com.example.taskmobile.Database.entity.PostDb;
+import com.example.taskmobile.database.dao.PostDao;
+import com.example.taskmobile.database.entity.PostDb;
 
 @Database(entities = {PostDb.class}, version = 1)
 public abstract class PostDataBase extends RoomDatabase {

@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"
-    android:background="#c3fdff">
+    tools:context=".ui.main.MainActivity"
+    android:background="@color/main_activity_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#42a5f5"
+        android:background="@color/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

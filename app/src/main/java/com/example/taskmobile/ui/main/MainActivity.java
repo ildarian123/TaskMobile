@@ -1,4 +1,4 @@
-package com.example.taskmobile.ui;
+package com.example.taskmobile.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;

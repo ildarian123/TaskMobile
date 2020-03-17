@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#88ffff">
+    android:background="@color/post_color">
 
 
     <TextView
@@ -14,27 +14,29 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="TITLE"
+        tools:text="@string/title"
         android:fontFamily="sans-serif-black"
-        android:paddingStart="16dp"/>
+        android:paddingStart="@dimen/medium_padding"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/authorOfThePost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="14dp"
+        android:textSize="@dimen/text_size"
         app:layout_constraintTop_toBottomOf="@+id/titleOfThePost"
-        tools:text="AUTHOR"
+        tools:text="@string/author"
         android:paddingBottom="10dp"
-        android:paddingStart="16dp"/>
+        android:paddingStart="@dimen/medium_padding"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/publishedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textSize="14dp"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

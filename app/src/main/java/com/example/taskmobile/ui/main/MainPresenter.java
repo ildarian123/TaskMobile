@@ -1,11 +1,10 @@
-package com.example.taskmobile.ui;
+package com.example.taskmobile.ui.main;
 
 import androidx.lifecycle.LiveData;
-import com.example.taskmobile.Database.entity.PostDb;
+import com.example.taskmobile.database.entity.PostDb;
 import java.util.List;
 
 public interface MainPresenter {
-    void onLastItemShown();
     void deleteAllPosts();
     List<PostDb> getAllPosts();
     void createListOfPosts(int count, int firstPost);

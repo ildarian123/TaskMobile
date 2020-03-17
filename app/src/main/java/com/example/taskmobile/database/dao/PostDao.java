@@ -1,11 +1,11 @@
-package com.example.taskmobile.Database.dao;
+package com.example.taskmobile.database.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.taskmobile.Database.entity.PostDb;
+import com.example.taskmobile.database.entity.PostDb;
 
 import java.util.List;
 

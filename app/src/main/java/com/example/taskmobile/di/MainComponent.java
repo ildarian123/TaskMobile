@@ -1,7 +1,7 @@
-package com.example.taskmobile;
+package com.example.taskmobile.di;
 
-import com.example.taskmobile.ui.MainActivity;
-import com.example.taskmobile.ui.MainScreenFragment;
+import com.example.taskmobile.ui.main.MainActivity;
+import com.example.taskmobile.ui.main.MainScreenFragment;
 
 import dagger.Component;
 
